@@ -1,0 +1,16 @@
+.mymetadata
+.checkstyle
+.classpath
+.project
+.class
+.war
+.zip
+.rar
+.idea
+.DS_Store
+*.iml
+.settings/*
+/indexes/*
+/logs/*
+/target/*
+/target/
