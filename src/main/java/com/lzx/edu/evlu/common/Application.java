@@ -4,6 +4,7 @@ import org.redisson.Redisson;
 import org.redisson.config.Config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class Application {
@@ -12,6 +13,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    @Bean
     public Redisson getRedisson() {
         //单机模式
         Config config = new Config();
