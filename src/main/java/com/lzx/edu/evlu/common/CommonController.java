@@ -17,14 +17,23 @@ public class CommonController {
     @RequestMapping("/stock")
     public String getStock() {
 
-        Integer stock = Integer.valueOf(stringRedisTemplate.opsForValue().get("stock"));
-        if (stock > 0) {
-            int realStock = stock - 1;
-            stringRedisTemplate.opsForValue().set("stock", realStock + "");
-            System.out.println("扣减成功，剩余库存：" + realStock);
-        } else {
-            System.out.println("扣减失败，库存不足");
+        try {
+            Boolean result = stringRedisTemplate.opsForValue().setIfAbsent("loadkey","mengzq");//jekins.setnx("","")
+            if(!result){
+                return "error";
+            }
+            Integer stock = Integer.valueOf(stringRedisTemplate.opsForValue().get("stock"));
+            if (stock > 0) {
+                int realStock = stock - 1;
+                stringRedisTemplate.opsForValue().set("stock", realStock + "");
+                System.out.println("扣减成功，剩余库存：" + realStock);
+            } else {
+                System.out.println("扣减失败，库存不足");
+            }
+        }finally {
+            stringRedisTemplate.delete("loadkey");
         }
+
         return "end";
     }
 
