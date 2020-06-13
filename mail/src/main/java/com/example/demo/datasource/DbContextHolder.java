@@ -20,7 +20,8 @@ public class DbContextHolder {
     private static final ThreadLocal<DbType> contextHolder = new ThreadLocal<>();
 
     public static void setDbType(DbType dbType){
-        if(dbType==null)throw new NullPointerException();
+        if(dbType==null)
+            throw new NullPointerException();
         contextHolder.set(dbType);
     }
 
