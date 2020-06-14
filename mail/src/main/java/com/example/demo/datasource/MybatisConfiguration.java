@@ -4,6 +4,7 @@ package com.example.demo.datasource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.aspectj.apache.bcel.util.ClassLoaderRepository;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
@@ -38,8 +39,7 @@ public class MybatisConfiguration extends MybatisAutoConfiguration {
 
     public AbstractRoutingDataSource roundRobinDataSouceProxy() {
         ReadWriteSplitRoutingDataSource proxy = new ReadWriteSplitRoutingDataSource();
-        //Map<Object, Object> targetDataResources = new ClassLoaderRepository.SoftHashMap();
-        Map<Object, Object> targetDataResources = new HashMap<>();
+        Map<Object, Object> targetDataResources = new ClassLoaderRepository.SoftHashMap();
         targetDataResources.put(DbContextHolder.DbType.MASTER, masterDataSource);
         targetDataResources.put(DbContextHolder.DbType.SLAVE, slaveDataSource);
         proxy.setDefaultTargetDataSource(masterDataSource);//默认源
