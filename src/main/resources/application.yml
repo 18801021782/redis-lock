@@ -1,0 +1,41 @@
+#server
+server:
+  context-path: /mail
+  port: 8091
+  session:
+      timeout: 1600
+
+##spring配置
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+  jackson:
+    data-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: NON_NULL
+    ##redis 先不配置
+
+
+
+
+druid:
+  type: com.alibaba.druid.pool.DruidDataSource
+  master:
+    url: jdbc:mysql://192.168.1.103:3306/firsttest?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    initial-size: 5
+    min-idle: 1
+    max-active: 100
+    test-on-borrow: true
+  slave:
+    url: jdbc:mysql://192.168.1.101:3306/firsttest?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    initial-size: 5
+    min-idle: 1
+    max-active: 100
+    test-on-borrow: true
